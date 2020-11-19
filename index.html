@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Find A Flick</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" rel="stylesheet"
+    type="text/css" />
+  <link href="main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header>
+        <h1>Find A Flick</h1>
+    </header>
+    <div class="wrapper">
+        <main>
+            <form>
+                <label for="movie">Enter the title of a movie to get recommendations:</label>
+                <input type="text" id="movie" name="movie" required>
+                <label for="max-results">Maximum number of results:</label>
+                <input type="number" name="max-results" id="max-results" value="10">
+                <button type="submit">Submit</button>
+            </form>
+            <p id="js-error-message" class="error-message"></p>
+            <p id="no-results" class="hidden">Sorry, no results found. Please try entering a different movie.</p>
+            <div class="results hidden">
+            <h2>Search Results</h2>
+            <p id="results-message"></p>
+            <ul id="results-list"></ul>
+            </div>
+        </main>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.js" crossorigin="anonymous"></script>
+  <script src="index.js"></script>
+</body>
+
+</html>
