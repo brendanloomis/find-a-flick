@@ -6,8 +6,47 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    margin: auto;
+    width: 900px;
+    background-color: #BBD5ED;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+form {
+    text-align: center;
+}
+
+form label{
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+form input {
+    text-align: center;
+}
+
+form input[type=text] {
+    width: 50%;
+}
+
+form input[type=number] {
+    width: 7%;
 }
 
 .hidden {
     display: none;
 }
+

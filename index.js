@@ -3,6 +3,7 @@ const tasteUrl = "https://tastedive.com/api/similar";
 const omdbApiKey = "577a3068";
 const omdbUrl = "https://www.omdbapi.com/"
 
+/* Formats paramaters to be added into API url */
 function formatQuery(params) {
     const query = Object.keys(params)
         .map(key => `${encodeURIComponent(key)}=${params[key]}`);
@@ -28,6 +29,7 @@ function getRecommendations(movie, maxResults) {
     });
 }
 
+/* Displays movie recommendations and information about the recommendations */
 function displayResults(responseJson) {
     $('#results-list').empty();
     $('#js-error-message').empty();
@@ -42,22 +44,20 @@ function displayResults(responseJson) {
         $('.results').addClass('hidden');
     } else {
         for (let i = 0; i < recommendations.length; i++) {
-            $('#results-list').append(`
-                <li>${recommendations[i].Name}</li>
-            `);
+            getMovieInfo(recommendations[i].Name);
         }
     };
 }
 
-/*function getMovieInfo(movie) {
+/* Gets information about a movie from the OMDb API then displays the information */
+function getMovieInfo(movie) {
     const params = {
         apikey: omdbApiKey,
-        t: movie
+        t: movie.toLowerCase().split(" ").join("+")
     };
 
     const queryString = formatQuery(params);
     const url = omdbUrl + "?" + queryString;
-    console.log(url);
 
     fetch (url)
         .then(response => {
@@ -66,12 +66,45 @@ function displayResults(responseJson) {
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => console.log(responseJson))
+        .then(responseJson => displayMovieInfo(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
     
-}*/
+}
+
+/* Creates list item for movie and information about the movie */
+function displayMovieInfo(responseJson) {
+    $('#results-list').append(`
+        <div class="list-wrapper">
+            <li>
+                <h3>${responseJson.Title}</h3>
+                <img src="${responseJson.Poster}" alt="${responseJson.Title} movie poster">
+                <p>${responseJson.Year}</p>
+                <p>${responseJson.Rated}</p>
+                <p>${responseJson.Runtime}</p>
+                <p>${responseJson.Genre}</p>
+                <p>Director: ${responseJson.Director}</p>
+                <p>Ratings:</p>
+                <ul class="ratings">${displayRatings(responseJson)}</ul>
+                <p>${responseJson.Plot}</p>
+            </li>
+        </div>
+    `)
+}
+
+/* Creates list to display the Ratings of the movie */
+function displayRatings(movie) {
+    let ratings = ``;
+    for (let i = 0; i < movie.Ratings.length; i++) {
+        if (movie.Ratings[i].Source === "Internet Movie Database") {
+            ratings += `<li>IMDb: ${movie.Ratings[i].Value}</li>`;
+        } else {
+            ratings += `<li>${movie.Ratings[i].Source}: ${movie.Ratings[i].Value}</li>`;
+        }
+    }
+    return ratings;
+}
 
 /* Watches form and handles form submit */
 function watchForm() {
