@@ -69,7 +69,7 @@ form input[type=text] {
 }
 
 form input[type=number] {
-    width: 7%;
+    width: 10%;
 }
 
 #no-results {
@@ -126,11 +126,16 @@ form input[type=number] {
         margin-left: 12px;
         margin-right: 10px;
         margin-bottom: 5px;
+        max-width: 100%;
     }
 
     .wrapper {
         width: 80%;
         margin: auto;
+    }
+
+    form input[type=number] {
+        width: 7%;
     }
 
     h1 {
