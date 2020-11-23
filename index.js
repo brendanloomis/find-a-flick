@@ -53,7 +53,7 @@ function displayResults(responseJson) {
 function getMovieInfo(movie) {
     const params = {
         apikey: omdbApiKey,
-        t: movie.toLowerCase().split(" ").join("+")
+        t: movie.split(" ").join("+")
     };
 
     const queryString = formatQuery(params);
@@ -79,15 +79,21 @@ function displayMovieInfo(responseJson) {
         <div class="list-wrapper">
             <li>
                 <h3>${responseJson.Title}</h3>
-                <img src="${responseJson.Poster}" alt="${responseJson.Title} movie poster">
-                <p>${responseJson.Year}</p>
-                <p>${responseJson.Rated}</p>
-                <p>${responseJson.Runtime}</p>
-                <p>${responseJson.Genre}</p>
-                <p>Director: ${responseJson.Director}</p>
-                <p>Ratings:</p>
-                <ul class="ratings">${displayRatings(responseJson)}</ul>
-                <p>${responseJson.Plot}</p>
+                <div class="movie-wrapper">
+                    <img src="${responseJson.Poster}" class="movie-poster" alt="${responseJson.Title} movie poster">
+                    <div class="info-wrapper">
+                        <p>${responseJson.Year}</p>
+                        <p>${responseJson.Rated}</p>
+                        <p>${responseJson.Runtime}</p>
+                        <p>${responseJson.Genre}</p>
+                        <p>Director: ${responseJson.Director}</p>
+                        <p>Cast: ${responseJson.Actors}</p>
+                        <p>Ratings:</p>
+                        <ul class="ratings">${displayRatings(responseJson)}</ul>
+                        <p>${responseJson.Plot}</p>
+                        <a href="https://www.imdb.com/title/${responseJson.imdbID}" target="_blank"><img src="images/imdb.png" class="imdb-logo" alt="IMDb link"></a>
+                    </div>
+                </div>
             </li>
         </div>
     `)
@@ -110,6 +116,7 @@ function displayRatings(movie) {
 function watchForm() {
     $('form').submit(event => {
         event.preventDefault();
+        $('form').removeClass('not-started');
         const inputMovie = $('#movie').val();
         const maxResults = $('#max-results').val();
         getRecommendations(inputMovie, maxResults);

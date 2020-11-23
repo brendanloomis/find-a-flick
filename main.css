@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nerko+One&display=swap');
 
 * {
     box-sizing: border-box;
@@ -6,13 +7,25 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    margin: auto;
-    width: 900px;
-    background-color: #BBD5ED;
+    background-color: #011126;
+}
+
+main {
+    margin: 20px;
+    color: #99B1BF;
+}
+
+header {
+    background-color: #4D6F8C;
+    margin: 0px;
+    padding: 5px;
 }
 
 h1 {
-    font-size: 40px;
+    font-size: 58px;
+    background-color: #4D6F8C;
+    font-family: 'Nerko One', cursive;
+    color: #011126;
 }
 
 h2 {
@@ -21,10 +34,23 @@ h2 {
 
 h3 {
     font-size: 30px;
+    margin-bottom: 5px;
+    margin-top: 0px;
+    margin-left: 10px;
 }
 
 form {
     text-align: center;
+}
+
+.not-started {
+    margin-top: 150px;
+}
+
+.not-started label {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 25px;
 }
 
 form label{
@@ -46,7 +72,86 @@ form input[type=number] {
     width: 7%;
 }
 
+#no-results {
+    margin-top: 40px;
+    font-size: 17px;
+}
+
+.list-wrapper {
+    background-color: #162C40;
+    margin-bottom: 10px;
+    list-style-type: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-right: 40px;
+}
+
+.movie-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-wrapper {
+    margin-left: 20px;
+    padding-bottom: 10px;
+}
+
+.movie-poster {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.imdb-logo {
+    width: 70px;
+}
+
 .hidden {
     display: none;
 }
 
+@media all and (min-width: 900px) {
+    .movie-wrapper {
+        flex-direction: row;
+    }
+
+    .list-wrapper {
+        padding-left: 20px;
+        padding-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .movie-poster {
+        margin-left: 12px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+    }
+
+    .wrapper {
+        width: 80%;
+        margin: auto;
+    }
+
+    h1 {
+        margin-left: 30px;
+        font-size: 70px;
+    }
+
+    h2 {
+        font-size: 35px;
+    }
+
+    h3 {
+        font-size: 33px;
+    }
+
+    form label {
+        font-size: 20px;
+    }
+
+    #no-results {
+        margin-top: 60px;
+        font-size: 19px;
+    }
+
+}

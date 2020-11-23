@@ -12,26 +12,26 @@
 </head>
 
 <body>
-    <header>
-        <h1>Find A Flick</h1>
-    </header>
-    <div class="wrapper">
-        <main>
-            <form>
-                <label for="movie">Enter the title of a movie to get recommendations:</label>
-                <input type="text" id="movie" name="movie" required>
-                <label for="max-results">Maximum number of results:</label>
-                <input type="number" name="max-results" id="max-results" value="10">
-                <button type="submit">Submit</button>
-            </form>
-            <p id="js-error-message" class="error-message"></p>
-            <p id="no-results" class="hidden">Sorry, no results found. Please try entering a different movie.</p>
-            <div class="results hidden">
-            <h2>Recommendations</h2>
-            <ul id="results-list"></ul>
-            </div>
-        </main>
-    </div>
+  <header>
+    <h1>Find A Flick</h1>
+  </header>
+  <div class="wrapper">
+    <main>
+      <form class="not-started">
+        <label for="movie">Enter the title of a movie you like to get recommendations:</label>
+        <input type="text" id="movie" name="movie" required>
+        <label for="max-results">Maximum number of results:</label>
+        <input type="number" name="max-results" id="max-results" value="10" min="1">
+        <button type="submit">Submit</button>
+      </form>
+      <p id="js-error-message" class="error-message"></p>
+      <p id="no-results" class="hidden">Sorry, no results found. Please try entering a different movie.</p>
+      <div class="results hidden">
+        <h2>Recommendations</h2>
+        <ul id="results-list"></ul>
+      </div>
+    </main>
+  </div>
   <script src="https://code.jquery.com/jquery-3.5.1.js" crossorigin="anonymous"></script>
   <script src="index.js"></script>
 </body>
