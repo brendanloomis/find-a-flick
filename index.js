@@ -1,7 +1,7 @@
-const tasteApiKey = "391747-FindAFli-DCQCLNM5";
-const tasteUrl = "https://tastedive.com/api/similar";
-const omdbApiKey = "577a3068";
-const omdbUrl = "https://www.omdbapi.com/"
+const tasteApiKey = '391747-FindAFli-DCQCLNM5';
+const tasteUrl = 'https://tastedive.com/api/similar';
+const omdbApiKey = '577a3068';
+const omdbUrl = 'https://www.omdbapi.com/';
 
 /* Formats paramaters to be added into API url */
 function formatQuery(params) {
@@ -14,10 +14,10 @@ function formatQuery(params) {
 function getRecommendations(movie, maxResults) {
     const params = {
         q: movie,
-        type: "movies",
+        type: 'movies',
         limit: maxResults,
         k: tasteApiKey,
-        callback: "results"
+        callback: 'results'
     };
 
     $.ajax({
@@ -25,7 +25,8 @@ function getRecommendations(movie, maxResults) {
         data: params,
         url: tasteUrl,
         dataType: 'jsonp',
-        success: (response) => displayResults(response)
+        success: (response) => displayResults(response),
+        error: (err) => $('#js-error-message').text(`Something went wrong: ${err.message}`)
     });
 }
 
@@ -36,8 +37,7 @@ function displayResults(responseJson) {
     $('.results').removeClass('hidden');
     $('#no-results').addClass('hidden');
 
-    let recommendations = responseJson.Similar.Results;
-    console.log(recommendations);
+    const recommendations = responseJson.Similar.Results;
 
     if (recommendations.length === 0) {
         $('#no-results').removeClass('hidden');
@@ -53,11 +53,11 @@ function displayResults(responseJson) {
 function getMovieInfo(movie) {
     const params = {
         apikey: omdbApiKey,
-        t: movie.split(" ").join("+")
+        t: movie.split(' ').join('+')
     };
 
     const queryString = formatQuery(params);
-    const url = omdbUrl + "?" + queryString;
+    const url = omdbUrl + '?' + queryString;
 
     fetch (url)
         .then(response => {
@@ -103,7 +103,7 @@ function displayMovieInfo(responseJson) {
 function displayRatings(movie) {
     let ratings = ``;
     for (let i = 0; i < movie.Ratings.length; i++) {
-        if (movie.Ratings[i].Source === "Internet Movie Database") {
+        if (movie.Ratings[i].Source === 'Internet Movie Database') {
             ratings += `<li>IMDb: ${movie.Ratings[i].Value}</li>`;
         } else {
             ratings += `<li>${movie.Ratings[i].Source}: ${movie.Ratings[i].Value}</li>`;
