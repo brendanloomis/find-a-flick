@@ -11,7 +11,6 @@ body {
 }
 
 main {
-    margin: 20px;
     color: #99B1BF;
 }
 
@@ -30,6 +29,7 @@ h1 {
 
 h2 {
     font-size: 32px;
+    margin-left: 10px;
 }
 
 h3 {

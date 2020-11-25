@@ -26,7 +26,9 @@ function getRecommendations(movie, maxResults) {
         url: tasteUrl,
         dataType: 'jsonp',
         success: (response) => displayResults(response),
-        error: (err) => $('#js-error-message').text(`Something went wrong: ${err.message}`)
+        error: (jqXHR, status, error) => {
+            $('#js-error-message').text(`Something went wrong: ${jqXHR.statusText}`);
+        }
     });
 }
 
@@ -76,27 +78,25 @@ function getMovieInfo(movie) {
 /* Creates list item for movie and information about the movie */
 function displayMovieInfo(responseJson) {
     $('#results-list').append(`
-        <div class="list-wrapper">
-            <li>
-                <h3>${responseJson.Title}</h3>
-                <div class="movie-wrapper">
-                    <img src="${responseJson.Poster}" class="movie-poster" alt="${responseJson.Title} movie poster">
-                    <div class="info-wrapper">
-                        <p>${responseJson.Year}</p>
-                        <p>${responseJson.Rated}</p>
-                        <p>${responseJson.Runtime}</p>
-                        <p>${responseJson.Genre}</p>
-                        <p>Director: ${responseJson.Director}</p>
-                        <p>Cast: ${responseJson.Actors}</p>
-                        <p>Ratings:</p>
-                        <ul class="ratings">${displayRatings(responseJson)}</ul>
-                        <p>${responseJson.Plot}</p>
-                        <a href="https://www.imdb.com/title/${responseJson.imdbID}" target="_blank"><img src="images/imdb.png" class="imdb-logo" alt="IMDb link"></a>
-                    </div>
+        <li class="list-wrapper">
+            <h3>${responseJson.Title}</h3>
+            <div class="movie-wrapper">
+                <img src="${responseJson.Poster}" class="movie-poster" alt="${responseJson.Title} movie poster">
+                <div class="info-wrapper">
+                    <p>${responseJson.Year}</p>
+                    <p>${responseJson.Rated}</p>
+                    <p>${responseJson.Runtime}</p>
+                    <p>${responseJson.Genre}</p>
+                    <p>Director: ${responseJson.Director}</p>
+                    <p>Cast: ${responseJson.Actors}</p>
+                    <p>Ratings:</p>
+                    <ul class="ratings">${displayRatings(responseJson)}</ul>
+                    <p>${responseJson.Plot}</p>
+                    <a href="https://www.imdb.com/title/${responseJson.imdbID}" target="_blank"><img src="images/imdb.png" class="imdb-logo" alt="IMDb link"></a>
                 </div>
-            </li>
-        </div>
-    `)
+            </div>
+        </li>
+    `);
 }
 
 /* Creates list to display the Ratings of the movie */
